@@ -1,4 +1,4 @@
-# Spotify Ad Mute (Windows)
+# Spotify Ad Mute (Windows)🎶🔇
 
 Questo script controlla Spotify in background e mette in muto solo la sessione audio di Spotify quando rileva una pubblicità.
 
