@@ -18,7 +18,7 @@ import asyncio
 import sys
 import time
 
-from pycaw.pycaw import AudioUtilities # type: ignore
+from pycaw.pycaw import AudioUtilities
 from winsdk.windows.media.control import (
     GlobalSystemMediaTransportControlsSessionManager as MediaManager,
 )
@@ -73,18 +73,41 @@ def set_spotify_mute(mute: bool) -> bool:
 
 async def main() -> None:
     we_muted = False
-    log("Avviato. In attesa di Spotify...")
+    spotify_open = None
+    log("Automute Avviato.")
 
     while True:
         try:
-            ad = await is_ad_playing()
+            session = await get_spotify_session()
+            spotify_now = session is not None
+
+            if spotify_open is None:
+                if spotify_now:
+                    log("Spotify aperto.")
+                else:
+                    log("Spotify chiuso.")
+            elif spotify_now != spotify_open:
+                if spotify_now:
+                    log("Spotify aperto.")
+                else:
+                    log("Spotify chiuso.")
+
+            spotify_open = spotify_now
+
+            if session is not None:
+                info = await session.try_get_media_properties_async()
+                artist = (info.artist or "").strip()
+                album = (info.album_title or "").strip()
+                ad = not artist or not album
+            else:
+                ad = None
         except Exception as exc:  # SMTC a volte lancia eccezioni transitorie
             log(f"errore lettura SMTC: {exc}")
             ad = None
 
         if ad is True and not we_muted:
             if set_spotify_mute(True):
-                log("pubblicita rilevata -> mute")
+                log("pubblicita' rilevata -> mute")
                 we_muted = True
         elif ad is False and we_muted:
             if set_spotify_mute(False):
