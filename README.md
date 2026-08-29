@@ -22,6 +22,8 @@ In pratica, il programma non silenzia tutto il sistema, ma solo la sessione audi
 pip install winsdk pycaw comtypes
 ```
 
+N.B. potrebbe creare conflitti con versioni di Python che vanno oltre il 3.12.
+
 ## Avvio via PowerShell
 
 Da dentro la cartella del progetto:
@@ -31,7 +33,7 @@ cd "C:\Users\Utente\Desktop\automute_W11"
 .\start_automute.ps1
 ```
 
-Oppure se vuoi avviare direttamente Python:
+Oppure se vuoi avviare direttamente Python (grezzo ma funziona):
 
 ```powershell
 C:\Users\Utente\Desktop\automute_W11\venv\Scripts\python.exe C:\Users\Utente\Desktop\automute_W11\spotify_ad_mute.py
