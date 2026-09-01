@@ -107,11 +107,11 @@ async def main() -> None:
 
         if ad is True and not we_muted:
             if set_spotify_mute(True):
-                log("pubblicita' rilevata -> mute")
+                log("Pubblicita' rilevata -> Mute mode")
                 we_muted = True
         elif ad is False and we_muted:
             if set_spotify_mute(False):
-                log("pubblicita finita -> unmute")
+                log("Pubblicita' finita -> Unmute mode")
             we_muted = False
         # ad is None: Spotify non attivo, non facciamo nulla
 

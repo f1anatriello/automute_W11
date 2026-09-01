@@ -29,14 +29,18 @@ N.B. potrebbe creare conflitti con versioni di Python che vanno oltre il 3.12.
 Da dentro la cartella del progetto:
 
 ```powershell
-cd "C:\Users\Utente\Desktop\automute_W11"
+cd "C:\Users\franc\Desktop\automute\automute_W11"
 .\start_automute.ps1
 ```
 
-Oppure se vuoi avviare direttamente Python (grezzo ma funziona):
+Se la cartella `venv` è stata creata con un altro profilo Windows, lo script la ricrea automaticamente. In caso contrario puoi rigenerarla manualmente:
 
 ```powershell
-C:\Users\Utente\Desktop\automute_W11\venv\Scripts\python.exe C:\Users\Utente\Desktop\automute_W11\spotify_ad_mute.py
+cd "C:\Users\franc\Desktop\automute\automute_W11"
+Remove-Item -Recurse -Force .\venv
+C:\Users\franc\AppData\Local\Programs\Python\Python312\python.exe -m venv .\venv
+.\venv\Scripts\python.exe -m pip install -r .\requirements.txt
+.\venv\Scripts\python.exe .\spotify_ad_mute.py
 ```
 
 ## File principali
@@ -54,7 +58,7 @@ Se appare un messaggio tipo `ModuleNotFoundError` o `No module named ...`, signi
 Esegui:
 
 ```powershell
-cd "C:\Users\Utente\Desktop\automute_W11"
+cd "C:\Users\franc\Desktop\automute\automute_W11"
 .\venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
