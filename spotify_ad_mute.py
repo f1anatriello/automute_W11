@@ -11,7 +11,7 @@ Come funziona:
     lo stesso meccanismo dietro il mixer volumi di Windows
 
 Dipendenze:
-    pip install winsdk pycaw comtypes
+    pip install winrt-Windows.Media.Control winrt-Windows.Foundation.Collections pycaw comtypes
 """
 
 import asyncio
@@ -19,7 +19,7 @@ import sys
 import time
 
 from pycaw.pycaw import AudioUtilities
-from winsdk.windows.media.control import (
+from winrt.windows.media.control import (
     GlobalSystemMediaTransportControlsSessionManager as MediaManager,
 )
 

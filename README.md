@@ -1,4 +1,4 @@
-# Spotify Ad Mute (Windows)🎶🔇
+# Spotify Ad Mute (Windows)
 
 Questo script controlla Spotify in background e mette in muto solo la sessione audio di Spotify quando rileva una pubblicità.
 
@@ -15,14 +15,13 @@ In pratica, il programma non silenzia tutto il sistema, ma solo la sessione audi
 
 - Windows 10/11
 - Spotify installato e in esecuzione
-- Python virtual environment presente nella cartella `venv`
-- dipendenze installate:
+- Python 3.11 o superiore
+- dipendenze installate nella virtual environment del progetto
 
 ```powershell
-pip install winsdk pycaw comtypes
+cd "C:\Users\franc\Desktop\automute\automute_W11"
+.\venv\Scripts\python.exe -m pip install -r .\requirements.txt
 ```
-
-N.B. potrebbe creare conflitti con versioni di Python che vanno oltre il 3.12.
 
 ## Avvio via PowerShell
 
@@ -30,16 +29,14 @@ Da dentro la cartella del progetto:
 
 ```powershell
 cd "C:\Users\franc\Desktop\automute\automute_W11"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\start_automute.ps1
 ```
 
-Se la cartella `venv` è stata creata con un altro profilo Windows, lo script la ricrea automaticamente. In caso contrario puoi rigenerarla manualmente:
+Il launcher usa solo la cartella `venv` del progetto e la crea se non esiste. Per un avvio diretto:
 
 ```powershell
 cd "C:\Users\franc\Desktop\automute\automute_W11"
-Remove-Item -Recurse -Force .\venv
-C:\Users\franc\AppData\Local\Programs\Python\Python312\python.exe -m venv .\venv
-.\venv\Scripts\python.exe -m pip install -r .\requirements.txt
 .\venv\Scripts\python.exe .\spotify_ad_mute.py
 ```
 
@@ -51,7 +48,7 @@ C:\Users\franc\AppData\Local\Programs\Python\Python312\python.exe -m venv .\venv
 
 ## Problemi comuni
 
-### 1. Errore di importazione di `winsdk` o `pycaw`
+### 1. Errore di importazione di `winrt` o `pycaw`
 
 Se appare un messaggio tipo `ModuleNotFoundError` o `No module named ...`, significa che la venv non contiene le dipendenze.
 
@@ -60,12 +57,6 @@ Esegui:
 ```powershell
 cd "C:\Users\franc\Desktop\automute\automute_W11"
 .\venv\Scripts\python.exe -m pip install -r requirements.txt
-```
-
-oppure:
-
-```powershell
-.\venv\Scripts\python.exe -m pip install winsdk pycaw comtypes
 ```
 
 ### 2. Il programma non rileva Spotify
